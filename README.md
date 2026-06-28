@@ -1,5 +1,5 @@
 # solar-system
- >simulate solar system in c++
+ >simulating solar system in c++
 
 [![License: Unlicense](https://img.shields.io/badge/License-Unlicense-red.svg)](https://unlicense.org/)
 
