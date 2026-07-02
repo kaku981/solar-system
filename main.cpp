@@ -35,18 +35,15 @@ void display() {
      glClear(GL_COLOR_BUFFER_BIT);
      glLoadIdentity();
 
-     glTranslatef(x_position, x_position, 0.0);
+     glTranslatef(0.0, 0.0, x_position);
 
      glBegin(GL_POLYGON);
 
      glColor3f(1.0, 0.0, 0.0);
-     glVertex2f(-1.0, 1.0);
-     glColor3f(1.0, 1.0, 0.0);
-     glVertex2f(-1.0, -1.0);
-     glColor3f(0.0, 1.0, 0.0);
-     glVertex2f(1.0, -1.0);
-     glColor3f(0.0, 0.0, 1.0);
-     glVertex2f(1.0, 1.0);
+     glVertex3f(-1.0, 1.0, 0.0);
+     glVertex3f(-1.0, -1.0, 0.0);
+     glVertex3f(1.0, -1.0, 0.0);
+     glVertex3f(1.0, 1.0, 0.0);
 
      glEnd();
 
@@ -57,7 +54,7 @@ void reshape(int w, int h) {
      glViewport(0, 0, (GLsizei)w, (GLsizei)h);
      glMatrixMode(GL_PROJECTION);
      glLoadIdentity();
-     gluOrtho2D(-10, 10, -10, 10);
+     gluPerspective(60, 1, 2.0, 50.0);
      glMatrixMode(GL_MODELVIEW);
 }
 
@@ -67,13 +64,13 @@ void timer(int) {
 
      switch(state) {
      case 1:
-         if(x_position < 9)
+         if(x_position < -5)
              x_position += 0.30;
          else
              state = -1;
          break;
      case -1:
-         if(x_position > -9)
+         if(x_position > -15)
              x_position -= 0.30;
          else
              state = 1;
