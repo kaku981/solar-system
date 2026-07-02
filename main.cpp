@@ -31,11 +31,12 @@ void display() {
      glClear(GL_COLOR_BUFFER_BIT);
      glLoadIdentity();
 
-     glPointSize(10.0);
-     glBegin(GL_POINTS);
+     glBegin(GL_TRIANGLES);
 
-     glVertex2f(5, 5);
-     glVertex2f(-5, -5);
+     glVertex2f(0.0, 5.0);
+     glVertex2f(4.0, -3.0);
+     glVertex2f(-4.0, -3.0);
+
      glEnd();
 
      glFlush();
