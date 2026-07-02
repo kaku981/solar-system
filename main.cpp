@@ -28,23 +28,25 @@ int main(int argc, char**argv) {
 
 }
 
-float x_position = -10.0;
+float x_position = 0.0;
 int state = 1;
 
 void display() {
      glClear(GL_COLOR_BUFFER_BIT);
      glLoadIdentity();
 
+     glTranslatef(x_position, x_position, 0.0);
+
      glBegin(GL_POLYGON);
 
      glColor3f(1.0, 0.0, 0.0);
-     glVertex2f(x_position, 1.0);
+     glVertex2f(-1.0, 1.0);
      glColor3f(1.0, 1.0, 0.0);
-     glVertex2f(x_position, -1.0);
+     glVertex2f(-1.0, -1.0);
      glColor3f(0.0, 1.0, 0.0);
-     glVertex2f(x_position+2.0, -1.0);
+     glVertex2f(1.0, -1.0);
      glColor3f(0.0, 0.0, 1.0);
-     glVertex2f(x_position+2.0, 1.0);
+     glVertex2f(1.0, 1.0);
 
      glEnd();
 
@@ -65,14 +67,14 @@ void timer(int) {
 
      switch(state) {
      case 1:
-         if(x_position < 8)
-             x_position += 0.15;
+         if(x_position < 9)
+             x_position += 0.30;
          else
              state = -1;
          break;
      case -1:
-         if(x_position >- 10)
-             x_position -= 0.15;
+         if(x_position > -9)
+             x_position -= 0.30;
          else
              state = 1;
          break;
