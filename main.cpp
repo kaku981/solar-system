@@ -8,7 +8,6 @@ void timer(int);
 
 void init() {
      glClearColor(0.0, 0.0, 0.0, 1.0);
-     
 }
 
 int main(int argc, char**argv) {
@@ -38,9 +37,13 @@ void display() {
 
      glBegin(GL_POLYGON);
 
+     glColor3f(1.0, 0.0, 0.0);
      glVertex2f(x_position, 1.0);
+     glColor3f(1.0, 1.0, 0.0);
      glVertex2f(x_position, -1.0);
+     glColor3f(0.0, 1.0, 0.0);
      glVertex2f(x_position+2.0, -1.0);
+     glColor3f(0.0, 0.0, 1.0);
      glVertex2f(x_position+2.0, 1.0);
 
      glEnd();
