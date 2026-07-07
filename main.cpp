@@ -8,22 +8,6 @@ static int stacks = 50;
 double zoomFactor = 1.0;
 const double zoomSpeed = 0.1;
 
-void reshape(int w, int h) {
-     const float aspect_ratio = (float)w / (float)h;
-
-     glViewport(0, 0, w, h);
-     glMatrixMode(GL_PROJECTION);
-
-     glLoadIdentity();
-     gluPerspective(45.0/ zoomFactor, aspect_ratio, 1.0, 100.0);
-
-     glMatrixMode(GL_MODELVIEW);
-     glLoadIdentity();
-     gluLookAt(0.0, 15.0, 25.0,
-               0.0, 0.0, 0.0,
-               0.0, 1.0, 0.0);
-}
-
 void drawPlanet(double distance, double size, double angle, double r, double g, double b)
 {
      glPushMatrix();
@@ -47,7 +31,6 @@ void drawOrbit(double radius)
      }
      glEnd();
 }
-
 
 void display() {
     const double t = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
@@ -98,6 +81,22 @@ void display() {
     }
 
     glutSwapBuffers();
+}
+
+void reshape(int w, int h) {
+     const float aspect_ratio = (float)w / (float)h;
+
+     glViewport(0, 0, w, h);
+     glMatrixMode(GL_PROJECTION);
+
+     glLoadIdentity();
+     gluPerspective(45.0/ zoomFactor, aspect_ratio, 1.0, 100.0);
+
+     glMatrixMode(GL_MODELVIEW);
+     glLoadIdentity();
+     gluLookAt(0.0, 15.0, 25.0,
+               0.0, 0.0, 0.0,
+               0.0, 1.0, 0.0);
 }
 
 void init() {
