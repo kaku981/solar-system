@@ -3,6 +3,7 @@
 
 float x_position = -10.0;
 int state = 1;
+float angle = 0.0f;
 
 void drawCircle(float cx, float cy, float r, int num_segments) {
     glBegin(GL_TRIANGLE_FAN);
@@ -19,7 +20,18 @@ void drawCircle(float cx, float cy, float r, int num_segments) {
 void display() {
      glClear(GL_COLOR_BUFFER_BIT);
      glColor3f(1.0, 1.0, 1.0);
+
+     glPushMatrix();
+     glColor3f(1.0, 1.0, 0.0);
      drawCircle(0.5, 0.5, 0.9, 50);
+     glPopMatrix();
+  
+     glPushMatrix();
+     glColor3f(0.0, 0.0, 1.0);
+     glRotatef(angle, 0, 0, 1);
+     glTranslatef(5, 0, 0);
+     drawCircle(0,0,0.4,50);
+     glPopMatrix();
 
      glutSwapBuffers();
 }
@@ -42,6 +54,11 @@ void reshape(int w, int h) {
 void timer(int) {
      glutPostRedisplay();
      glutTimerFunc(1000/60, timer, 0);
+
+     angle += 0.5f;
+     
+     if (angle > 360)
+          angle = 0;
 
      switch(state) {
      case 1:
