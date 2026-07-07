@@ -1,6 +1,8 @@
 #include <GL/glut.h>
 #include <math.h>
 
+int angle = 0.0;
+
 void drawCircle(float cx, float cy, float r, int num_segments) {
     glBegin(GL_TRIANGLE_FAN);
     glVertex2f(cx, cy);
@@ -16,7 +18,20 @@ void drawCircle(float cx, float cy, float r, int num_segments) {
 void display() {
      glClear(GL_COLOR_BUFFER_BIT);
      glColor3f(1.0, 1.0, 1.0);
-     drawCircle(0.5, 0.5, 0.2, 50);
+
+     glPushMatrix();
+     glColor3f(1.0, 1.0, 0.0);
+      glTranslatef(0, 0, 0);
+      drawCircle(0.5, 0.5, 0.1, 50);
+     glPopMatrix();
+
+     glPushMatrix();
+     glColor3f(0.0, 0.0, 1.0);
+      glRotated(0.0f, 0.0, 1.0, .0);
+      glRotated(0.0f, 0.0, -1.0, 0.0);
+      glTranslatef(0, 0, 0);
+      drawCircle(0.8, 0.5, 0.1, 50);
+     glPopMatrix();
 
      glFlush();
 }
