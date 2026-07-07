@@ -1,7 +1,8 @@
 #include <GL/glut.h>
 #include <math.h>
 
-int angle = 0.0;
+float x_position = -10.0;
+int state = 1;
 
 void drawCircle(float cx, float cy, float r, int num_segments) {
     glBegin(GL_TRIANGLE_FAN);
@@ -18,29 +19,44 @@ void drawCircle(float cx, float cy, float r, int num_segments) {
 void display() {
      glClear(GL_COLOR_BUFFER_BIT);
      glColor3f(1.0, 1.0, 1.0);
+     drawCircle(0.5, 0.5, 0.9, 50);
 
-     glPushMatrix();
-     glColor3f(1.0, 1.0, 0.0);
-      glTranslatef(0, 0, 0);
-      drawCircle(0.5, 0.5, 0.1, 50);
-     glPopMatrix();
-
-     glPushMatrix();
-     glColor3f(0.0, 0.0, 1.0);
-      glRotated(0.0f, 0.0, 1.0, .0);
-      glRotated(0.0f, 0.0, -1.0, 0.0);
-      glTranslatef(0, 0, 0);
-      drawCircle(0.8, 0.5, 0.1, 50);
-     glPopMatrix();
-
-     glFlush();
+     glutSwapBuffers();
 }
 
 void init() {
      glClearColor(0.0, 0.0, 0.0, 1.0);
-     glMatrixMode(GL_PROJECTION);
+      glMatrixMode(GL_PROJECTION);
      glLoadIdentity();
      glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+}
+
+void reshape(int w, int h) {
+     glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+     glMatrixMode(GL_PROJECTION);
+     glLoadIdentity();
+     gluOrtho2D(-10, 10, -10, 10);
+     glMatrixMode(GL_MODELVIEW);
+}
+
+void timer(int) {
+     glutPostRedisplay();
+     glutTimerFunc(1000/60, timer, 0);
+
+     switch(state) {
+     case 1:
+         if(x_position < 8)
+             x_position += 0.15;
+         else
+             state = -1;
+         break;
+     case -1:
+         if(x_position >- 10)
+             x_position -= 0.15;
+         else
+             state = 1;
+         break;
+     }
 }
 
 int main(int argc, char**argv) {
@@ -53,6 +69,8 @@ int main(int argc, char**argv) {
     glutCreateWindow("solar system");
 
     glutDisplayFunc(display);
+    glutReshapeFunc(reshape);
+    glutTimerFunc(1000, timer, 0);
     init();
 
     glutMainLoop();
